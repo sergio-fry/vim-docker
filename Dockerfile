@@ -1,11 +1,16 @@
+MAINTAINER Sergei O. Udalov <sergei.udalov@gmail.com>
+
 FROM debian:buster
 
-RUN apt update
-RUN apt install -y git-core
-RUN apt install -y neovim
-RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-RUN sh ~/.vim_runtime/install_awesome_vimrc.sh
+ENV AMIX_VIMRC_REVISION=993ed55
 
-RUN mkdir -p ~/.config
-RUN ln -s ~/.vim_runtime ~/.config/nvim
-RUN ln -s ~/.vimrc ~/.config/nvim/init.vim
+RUN apt update && apt install -y neovim git-core
+RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime \
+                      && cd ~/.vim_runtime && git checkout $AMIX_VIMRC_REVISION \
+                      && sh ~/.vim_runtime/install_awesome_vimrc.sh
+                      && mkdir -p ~/.config \
+                          && ln -s ~/.vim_runtime ~/.config/nvim \
+                          && ln -s ~/.vimrc ~/.config/nvim/init.vim
+
+WORKDIR /guest
+ENTRYPOINT ["vim"]

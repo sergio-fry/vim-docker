@@ -1,8 +1,8 @@
 vim: build
-	docker run -i -t vim-docker nvim
+	docker run -i -t udalov/vim
 
 build:
-	docker build -t vim-docker .
+	docker build -t udalov/vim .
 
 shell: build
-	docker run -i -t vim-docker bash
+	docker run -i --entrypoint=bash -t udalov/vim
