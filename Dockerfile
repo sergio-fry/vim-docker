@@ -11,8 +11,9 @@ RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime \
                       && ln -s ~/.vim_runtime ~/.config/nvim \
                       && ln -s ~/.vimrc ~/.config/nvim/init.vim
 
-COPY my_configs.vim /root/.vim_runtime/
 RUN cd ~/.vim_runtime && git clone git://github.com/tpope/vim-rails.git my_plugins/vim-rails
+
+COPY my_configs.vim /root/.vim_runtime/
 
 WORKDIR /guest
 ENTRYPOINT ["vim"]
