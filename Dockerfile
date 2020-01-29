@@ -3,7 +3,7 @@ MAINTAINER Sergei O. Udalov <sergei.udalov@gmail.com>
 
 ENV VIM_REVISION=v8.2.0172
 
-RUN apk add git vim curl
+RUN apk add git vim curl bash
 
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
