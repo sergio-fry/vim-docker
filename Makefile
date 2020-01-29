@@ -1,5 +1,5 @@
 vim: build
-	docker run -it udalov/vim
+	docker-term-run udalov/vim
 
 build:
 	docker build -t udalov/vim .
